@@ -30,7 +30,7 @@
 
         <label for="" class="form-label">Computer Type</label><br>
                                                         <div class="input-group mb-3">
-                                                            <select name="computerType" class="form-select" aria-label="Default select example">
+                                                            <select name="Type" class="form-select" aria-label="Default select example">
                                                                 <option selected>Computer Type</option>
                                                                 <option value="Laptop">Laptop</option>
                                                                 <option value="Desktop">Desktop</option>
@@ -40,7 +40,7 @@
 
         <label for="" class="form-label">Brand</label><br>
         <div class="input-group mb-3">
-            <select name="brandType" class="form-select" aria-label="Default select example">
+            <select name="Brand" class="form-select" aria-label="Default select example">
                 <option selected>Brand</option>
                 <option value="Lenovo">Lenovo</option>
                 <option value="Dell">Dell</option>
@@ -50,7 +50,7 @@
 
         <label for="" class="form-label">CPU</label><br>
         <div class="input-group mb-3">
-            <select name="cpuType" class="form-select" aria-label="Default select example">
+            <select name="CPU" class="form-select" aria-label="Default select example">
                 <option selected>CPU</option>
                 <option value="Core i3 3rd Gen">Core i3 3rd Gen</option>
                 <option value="Core i3 5th Gen">Core i3 5th Gen</option>
@@ -60,7 +60,7 @@
 
         <label for="" class="form-label">RAM</label><br>
         <div class="input-group mb-3">
-            <select name="ramType" class="form-select" aria-label="Default select example">
+            <select name="RAM" class="form-select" aria-label="Default select example">
                 <option selected>RAM</option>
                 <option value="DDR 4G">DDR 4G</option>
                 <option value="DDR 8G">DDR 8G</option>
@@ -78,13 +78,13 @@
 
         <label for="" class="form-label">Is SSD ?</label><br>
         <div class="input-group mb-3">
-            <input name="isSSD" type="checkbox" class="form-control" aria-label="Recipient's username"
+            <input name="isSSD" type="checkbox" class="form-check-input" value=""  id="isSSD" aria-label="Recipient's username"
                 aria-describedby="basic-addon2">
         </div>
 
         <label for="" class="form-label">Is Active ?</label><br>
         <div class="input-group mb-3">
-            <input name="isActive" type="checkbox" class="form-control"aria-label="Recipient's username"
+            <input name="isActive" type="checkbox" class="form-check-input" value="" id="isActive" aria-label="Recipient's username"
                 aria-describedby="basic-addon2">
         </div>
 
@@ -106,5 +106,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
+
+<script>
+    let isSSD = document.getElementById("isSSD");
+    let isActive = document.getElementById("isActive");
+
+
+    isSSD.addEventListener("click", (e) => {
+        e.target.value = "true";
+    });
+
+    isActive.addEventListener("click", (e) => {
+        e.target.value = "true";
+    });
+
+</script>
 
 </html>

@@ -31,35 +31,35 @@
 
         <label for="" class="form-label">Level Name</label><br>
         <div class="input-group mb-3">
-            <input type="text" name="levelName" class="form-control" value="@Model.Name" aria-label="Recipient's username"
+            <input type="text" name="levelName" class="form-control" value="@Model.LevelName" aria-label="Recipient's username"
                 aria-describedby="basic-addon2">
         </div>
 
 
         <label for="" class="form-label">Computer Type</label><br>
                                                         <div class="input-group mb-3">
-                                                            <select name="computerType" id="computerTypeDropDown"  class="form-select" aria-label="Default select example">
+                                                            <select name="Type" id="computerTypeDropDown"  class="form-select" aria-label="Default select example">
                                                             </select>
                                                         </div>
 
 
         <label for="" class="form-label">Brand</label><br>
         <div class="input-group mb-3">
-            <select name="brandType" id="brandTypeDropDown" class="form-select" aria-label="Default select example">
+            <select name="Brand" id="brandTypeDropDown" class="form-select" aria-label="Default select example">
 
               </select>
         </div>
 
         <label for="" class="form-label">CPU</label><br>
         <div class="input-group mb-3">
-            <select id="cpuTypeDropDown" name="cpuType" class="form-select" aria-label="Default select example">
+            <select id="cpuTypeDropDown" name="CPU" class="form-select" aria-label="Default select example">
 
               </select>
         </div>
 
         <label for="" class="form-label">RAM</label><br>
         <div class="input-group mb-3">
-            <select name="ramType" id="ramTypeDropDown" class="form-select" aria-label="Default select example">
+            <select name="RAM" id="ramTypeDropDown" class="form-select" aria-label="Default select example">
   
               </select>
         </div>
@@ -74,13 +74,13 @@
 
         <label for="" class="form-label">Is SSD ?</label><br>
         <div class="input-group mb-3">
-            <input name="isSSD" type="checkbox" class="form-control" aria-label="Recipient's username"
+            <input name="isSSD" type="checkbox" class="form-check-input" aria-label="Recipient's username"
                 aria-describedby="basic-addon2">
         </div>
 
         <label for="" class="form-label">Is Active ?</label><br>
         <div class="input-group mb-3">
-            <input name="isActive" type="checkbox" class="form-control"aria-label="Recipient's username"
+            <input name="isActive" type="checkbox" class="form-check-input"aria-label="Recipient's username"
                 aria-describedby="basic-addon2">
         </div>
 
@@ -104,10 +104,10 @@
     crossorigin="anonymous"></script>
 
 <script>
-    let computerType =["Laptop","Desktop"];
-    let brandType = ["Lenovo","Dell","Acer"];
-    let cpuType = ["Core i3 3rd Gen","Core i3 5th Gen","Core i3 7th Gen"];
-    let ramType = ["DDR 4G","DDR 8G","DDR 16G"];
+    let computerType = ["Laptop", "Desktop"];
+    let brandType = ["Lenovo", "Dell", "Acer"];
+    let cpuType = ["Core i3 3rd Gen", "Core i3 5th Gen", "Core i3 7th Gen"];
+    let ramType = ["DDR 4G", "DDR 8G", "DDR 16G"];
 
     let computerTypeDropDown = document.getElementById("computerTypeDropDown");
     let brandTypeDropDown = document.getElementById("brandTypeDropDown");
@@ -128,7 +128,7 @@
 
     for (let i = 0; i < computerType.length; i++) {
         let option = document.createElement("option");
-        if(computerTypeDropDownValueText===computerType[i]){
+        if (computerTypeDropDownValueText === computerType[i]) {
             option.selected = true;
         }
         option.value = computerType[i];
@@ -139,7 +139,7 @@
 
     for (let i = 0; i < brandType.length; i++) {
         let option = document.createElement("option");
-        if(brandTypeDropDownValueText===brandType[i]){
+        if (brandTypeDropDownValueText === brandType[i]) {
             option.selected = true;
         }
         option.value = brandType[i];
@@ -150,7 +150,7 @@
 
     for (let i = 0; i < cpuType.length; i++) {
         let option = document.createElement("option");
-        if(cpuTypeDropDownValueText===cpuType[i]){
+        if (cpuTypeDropDownValueText === cpuType[i]) {
             option.selected = true;
         }
         option.value = cpuType[i];
@@ -161,13 +161,28 @@
 
     for (let i = 0; i < ramType.length; i++) {
         let option = document.createElement("option");
-        if(ramTypeDropDownValueText===ramType[i]){
+        if (ramTypeDropDownValueText === ramType[i]) {
             option.selected = true;
         }
         option.value = ramType[i];
         option.text = ramType[i];
         ramTypeDropDown.appendChild(option);
     }
+
+
+
+        let isSSD = document.getElementById("isSSD");
+        let isActive = document.getElementById("isActive");
+
+
+    isSSD.addEventListener("click", (e) => {
+            e.target.value = "true";
+    });
+
+    isActive.addEventListener("click", (e) => {
+            e.target.value = "true";
+    });
+
 
 
 </script>

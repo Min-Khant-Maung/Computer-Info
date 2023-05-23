@@ -70,9 +70,9 @@ namespace SFMS.Controllers
 
                 computerinfo.StorageSize = computerInfoViewModel.StorageSize;
 
-                computerinfo.isActive = computerInfoViewModel.isActive;
+                computerinfo.isActive = Convert.ToBoolean(computerInfoViewModel.isActive);
 
-                computerinfo.isSSD = computerInfoViewModel.isSSD;
+                computerinfo.isSSD = Convert.ToBoolean(computerInfoViewModel.isSSD);
 
                 computerinfo.CreatedAt = DateTime.Now;
                 computerinfo.UpdatedAt = DateTime.Now;
@@ -99,6 +99,11 @@ namespace SFMS.Controllers
             return RedirectToAction("List");
         }
 
+
+        public IActionResult Entry()
+        {
+            return View();
+        }
 
         // ko pine yay
         //public IActionResult List()
@@ -135,75 +140,70 @@ namespace SFMS.Controllers
             return RedirectToAction("List");
         }
 
-        //public IActionResult Edit(string id)
-        //{
-        //    StudentViewModel studentViewModel = _applicationDbcontent.Students
-        //        .Where(w => w.Id == id)
-        //        .Select(s => new StudentViewModel
-        //        {
-        //            Code = s.Code,
-        //            Id = s.Id,
-        //            Name = s.Name,
-        //            Email = s.Email,
-        //            Phone = s.Phone,
-        //            Address = s.Address,
-        //            NRC = s.NRC,
-        //            DOB = s.DOB,
-        //            FatherName = s.FatherName,
-        //            BatchId = s.BatchId,
-        //            UserId = s.UserId
-        //        }).SingleOrDefault();
+        public IActionResult Edit(string id)
+        {
+            ComputerInfoViewModel computerInfoViewModel = _applicationDbcontent.ComputerInfos
+                .Where(w => w.Id == id)
+                .Select(s => new ComputerInfoViewModel
+                {
+                    Id = s.Id,
+                    LevelName = s.LevelName,
+                    Type = s.Type,
+                    Brand = s.Brand,
+                    CPU = s.CPU,
+                    RAM = s.RAM,
+                    StorageSize = s.StorageSize,
+                    isSSD = s.isSSD,
+                    isActive = s.isActive,
+                    CreatedUserId = s.CreatedUserId,
+                    CreatedAt = s.CreatedAt,
+                    UpdatedUserId = s.UpdatedUserId,
+                    UpdatedAt = s.UpdatedAt
+                }).SingleOrDefault();
 
-        //    ViewBag.Batches = _applicationDbcontent.Batches.Select(s => new SelectListItem
-        //    {
-        //        Value = s.Id,
-        //        Text = s.Name
-        //    }).ToList();
-        //    return View(studentViewModel);
-        //}
+         
+            return View(computerInfoViewModel);
+        }
 
-        //[Authorize(Roles = "admin")]
-        //[HttpPost]
-        //public IActionResult Edit(StudentViewModel studentViewModel)
-        //{
-        //    bool isSuccess = false;
-        //    try
-        //    {
-        //        Student student = new Student();
-        //        //audit columns
-        //        student.Id = studentViewModel.Id;
-        //        student.ModifiedDate = DateTime.Now;
-        //        student.Ip = GetLocalIPAddress();
+        [HttpPost]
+        public IActionResult Edit(ComputerInfoViewModel computerInfoViewModel)
+        {
+            bool isSuccess = false;
+            try
+            {
+                ComputerInfo computerinfo = new ComputerInfo();
+                //audit columns
+                computerinfo.Id = computerInfoViewModel.Id;
+                computerinfo.UpdatedAt = DateTime.Now;
+                computerinfo.UpdatedUserId = Guid.NewGuid().ToString();
+                computerinfo.StorageSize = computerInfoViewModel.StorageSize;
+                computerinfo.Type = computerInfoViewModel.Type;
+                computerinfo.LevelName = computerInfoViewModel.LevelName;
+                computerinfo.Brand = computerInfoViewModel.Brand;
+                computerinfo.CPU = computerInfoViewModel.CPU;
+                computerinfo.RAM = computerInfoViewModel.RAM;
+                computerinfo.isActive = computerInfoViewModel.isActive;
+                computerinfo.isSSD = computerInfoViewModel.isSSD;
 
-        //        //ui columns
-        //        student.Code = studentViewModel.Code;
-        //        student.Name = studentViewModel.Name;
-        //        student.DOB = studentViewModel.DOB;
-        //        student.FatherName = studentViewModel.FatherName;
-        //        student.Email = studentViewModel.Email;
-        //        student.Phone = studentViewModel.Phone;
-        //        student.Address = studentViewModel.Address;
-        //        student.NRC = studentViewModel.NRC;
-        //        student.FatherName = studentViewModel.FatherName;
-        //        student.UserId = studentViewModel.UserId;
-        //        _applicationDbcontent.Entry(student).State = EntityState.Modified;//Updating the existing records in DBSet
-        //        _applicationDbcontent.SaveChanges();//Updating the records to the database
-        //        isSuccess = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
 
-        //    }
-        //    if (isSuccess)
-        //    {
-        //        TempData["msg"] = "Update Success";
-        //    }
-        //    else
-        //    {
-        //        TempData["msg"] = "Error occur while updating";
-        //    }
-        //    return RedirectToAction("List");
-        //}
+                _applicationDbcontent.Entry(computerinfo).State = EntityState.Modified;//Updating the existing records in DBSet
+                _applicationDbcontent.SaveChanges();//Updating the records to the database
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            if (isSuccess)
+            {
+                TempData["msg"] = "Update Success";
+            }
+            else
+            {
+                TempData["msg"] = "Error occur while updating";
+            }
+            return RedirectToAction("List");
+        }
 
         //finding 
     }
